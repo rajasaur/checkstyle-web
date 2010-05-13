@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.collabnet.checkstyle.model">
+    <class name="Rule" table="RULES">
+        <id name="id" column="RULE_ID">
+            <generator class="native" />
+        </id>
+        <property name="ruleName" column="NAME" not-null="true" />
+        <property name="ruleDescription" column="DESCRIPTION" not-null="true" />
+        <property name="active" column="ACTIVE" />
+        <set name="checks" table="RULE_CHECKS">
+            <key column="RULE_ID" />
+            <many-to-many column="CHECK_ID" class="Check" />
+        </set>
+    </class>
+</hibernate-mapping>

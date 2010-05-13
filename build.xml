@@ -1,0 +1,44 @@
+<project name="Checkstyle-IA" default="deploy" basedir=".">
+    <target name="init">
+        <path id="classpath">
+            <fileset dir="${basedir}/lib/struts-1.3.10/lib" includes="*.jar" />
+            <fileset dir="${basedir}/lib/hibernate-3" includes="*.jar" />
+            <fileset dir="/apps/apache-tomcat-5.5.25/common/lib" includes="servlet-api.jar" />
+            <fileset dir="/apps/checkstyle-5.1" includes="*.jar" />
+        </path>
+        <mkdir dir="${basedir}/build" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac  destdir="${basedir}/build"
+                debug="true"
+                classpathref="classpath">
+            <src path = "${basedir}/src" />
+        </javac>
+        <copy  todir="${basedir}/build">
+            <fileset  dir="${basedir}/src/" includes="**/*.hbm.xml" />
+        </copy>
+    </target>
+    
+    <target name="war" depends="compile">
+        <jar destfile="${basedir}/dist/checkstyleia.war">
+            <zipfileset dir="${basedir}/conf" includes="struts-config.xml,web.xml" prefix="WEB-INF" />
+            <zipfileset  dir="${basedir}/conf/tld" prefix="WEB-INF/tld" />
+            <zipfileset dir="${basedir}/build" prefix="WEB-INF/classes" />
+            <zipfileset dir="${basedir}/conf" includes="*.properties,hibernate.cfg.xml" prefix="WEB-INF/classes" />
+            <zipfileset dir="${basedir}/lib/struts-1.3.10/lib" includes="*.jar"
+                        prefix="WEB-INF/lib" />
+            <zipfileset dir="${basedir}/lib/hibernate-3" includes="*.jar"
+                        prefix="WEB-INF/lib" />
+            <zipfileset dir="/apps/checkstyle-5.1" includes="*.jar"
+                        prefix="WEB-INF/lib" />
+            <zipfileset dir="${basedir}/jsp" />
+        </jar>
+
+    </target>
+
+    <target name="deploy" depends="war">
+        <copy todir = "/apps/apache-tomcat-5.5.25/webapps"
+              file="${basedir}/dist/checkstyleia.war" />
+    </target>
+</project>

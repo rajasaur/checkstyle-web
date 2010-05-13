@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.collabnet.checkstyle.model">
+    <class name="Check" table="CHECKS">
+        <id name="id" column="CHECK_ID">
+            <generator class="native" />
+        </id>
+        <property name="checkName" column="NAME" not-null="true" />
+        <property name="checkDescription" column="DESCRIPTION" not-null="true" />
+        <property name="active" column="ACTIVE" />
+        <property name="parent" column="PARENT" not-null="true" />
+    </class>
+</hibernate-mapping>

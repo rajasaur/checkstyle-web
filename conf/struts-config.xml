@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+@COPYRIGHT
+SourceForge(r) Enterprise Edition
+Copyright 2007 CollabNet, Inc. All rights reserved.
+http://www.collab.net
+COPYRIGHT@
+-->
+
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+  <!-- Form Bean Definitions -->
+    <form-beans>
+        <form-bean
+	        name="fileUploadForm"
+	        type="com.collabnet.checkstyle.forms.CheckFileForm" />
+        <form-bean
+            name="addRuleForm"
+            type="com.collabnet.checkstyle.forms.AddRuleForm" />
+    </form-beans>
+
+    <!-- Global Exception Definitions -->
+    <global-exceptions>
+    </global-exceptions>
+
+  <!-- Global Forward Definitions -->
+  <global-forwards>
+    <forward name="home" path="/home.jsp" contextRelative="true"/>
+    <!-- apps -->
+  </global-forwards>
+
+  <!-- Action Mapping Definitions -->
+  <action-mappings>
+     <action
+	    path="/home"
+	    type="com.collabnet.checkstyle.actions.CheckstyleHome">
+	    <forward name="view" path="/home.jsp"/>
+	</action>
+    <action
+        path="/upload"
+        type="com.collabnet.checkstyle.actions.CheckFile"
+        scope="request"
+        input="/upload.jsp"
+        name="fileUploadForm">
+    </action>
+    <action
+        path="/listChecks"
+        type="com.collabnet.checkstyle.actions.ListChecks">
+        <forward name="listChecks" path="/listChecks.jsp" />    
+    </action>
+    <action
+        path="/addRule"
+        type="com.collabnet.checkstyle.actions.AddNewRule"
+        scope="request"
+        name="addRuleForm"
+        input="/addRule.jsp">
+    </action>
+        
+  </action-mappings>
+
+  <message-resources parameter="messages" />
+</struts-config>
