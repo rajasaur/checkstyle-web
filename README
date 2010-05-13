@@ -1,0 +1,14 @@
+This is a Java based webapp to create rules and add checks for Checkstyle (http://checkstyle.sf.net).
+Checkstyle typically needs a config file that is used for validating the contents of Java files and
+is run commandline or using Ant. 
+
+This project attempts to web-ify this. You can look at all existing checks available, add a new check
+into the repository, add a new rule (config file) containing checks that are available as well as
+validate whether an uploaded file will match the given checks.
+
+Its still at its infancy, and the only functionalities that work are
+ * List all Checks
+ * Create rule using existing checks
+ * Upload a Java file and validate against a rule
+
+
